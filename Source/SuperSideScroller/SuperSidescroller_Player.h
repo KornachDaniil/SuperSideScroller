@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "PlayerProjectile.h"
 #include "SuperSideScrollerCharacter.h"
 #include "SuperSidescroller_Player.generated.h"
 
@@ -16,6 +17,8 @@ class SUPERSIDESCROLLER_API ASuperSidescroller_Player : public ASuperSideScrolle
 
 public:
 	ASuperSidescroller_Player();
+
+	void SpawnProjectile();
 
 protected:
 
@@ -38,4 +41,11 @@ protected:
 	
 private:
 	bool bIsSprinting;
+
+	UPROPERTY(EditAnywhere)
+	UAnimMontage* ThrowMontage;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<APlayerProjectile> PlayerProjectile;
+	
 };

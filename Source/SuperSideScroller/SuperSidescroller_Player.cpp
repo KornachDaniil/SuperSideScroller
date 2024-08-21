@@ -65,5 +65,31 @@ void ASuperSidescroller_Player::StopSprinting()
 
 void ASuperSidescroller_Player::ThrowProjectile()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Hello World"));
+	if (ThrowMontage != nullptr)
+	{
+		const bool bIsMontagePlaying = GetMesh()->GetAnimInstance()->Montage_IsPlaying(ThrowMontage);
+		if(bIsMontagePlaying != true)
+		{
+			GetMesh()->GetAnimInstance()->Montage_Play(ThrowMontage, 1.0f);
+		}
+	}
 }
+
+
+void ASuperSidescroller_Player::SpawnProjectile()
+{
+	if (PlayerProjectile != nullptr)
+	{
+		UWorld* World = GetWorld();
+		if (World != nullptr)
+		{
+			FActorSpawnParameters SpawnParams;
+			SpawnParams.Owner = this;
+			const FVector SpawnLocation = this->GetMesh()->GetSocketLocation(FName("ProjectileSocket"));
+			const FRotator Rotation = GetActorForwardVector().Rotation();
+			APlayerProjectile* Projectile = World->SpawnActor<APlayerProjectile>(PlayerProjectile, SpawnLocation, Rotation, SpawnParams);
+			UE_LOG(LogTemp, Warning, TEXT("Spawn"));
+		}
+	}	
+}
+
