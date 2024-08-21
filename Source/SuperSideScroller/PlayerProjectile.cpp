@@ -3,6 +3,8 @@
 
 #include "PlayerProjectile.h"
 
+#include "EnemyBase.h"
+
 // Sets default values
 APlayerProjectile::APlayerProjectile()
 {
@@ -30,5 +32,16 @@ void APlayerProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, 
 	FVector NormalImpulse, const FHitResult& Hit)
 {
 	UE_LOG(LogTemp, Warning, TEXT("HIT"));
+	AEnemyBase* Enemy = Cast<AEnemyBase>(OtherActor);
+	if (Enemy != nullptr)
+	{
+		Enemy->DestroyEnemy();
+	}
+	ExplodeProjectile();
+}
+
+void APlayerProjectile::ExplodeProjectile()
+{
+	Destroy();
 }
 
