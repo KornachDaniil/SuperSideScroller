@@ -70,7 +70,7 @@ void ASuperSidescroller_Player::ThrowProjectile()
 		const bool bIsMontagePlaying = GetMesh()->GetAnimInstance()->Montage_IsPlaying(ThrowMontage);
 		if(bIsMontagePlaying != true)
 		{
-			GetMesh()->GetAnimInstance()->Montage_Play(ThrowMontage, 1.0f);
+			GetMesh()->GetAnimInstance()->Montage_Play(ThrowMontage, 2.0f);
 		}
 	}
 }
