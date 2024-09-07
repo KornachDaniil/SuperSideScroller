@@ -5,6 +5,7 @@
 
 #include "EnemyBase.h"
 #include "Components/AudioComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystemComponent.h"
 
 // Sets default values
@@ -49,6 +50,21 @@ void APlayerProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, 
 
 void APlayerProjectile::ExplodeProjectile()
 {
-	Destroy();
+	UWorld* World = GetWorld();
+	
+	if (World != nullptr)
+	{
+		if (DestroyEffects != nullptr)
+		{
+			UGameplayStatics::SpawnEmitterAtLocation(World, DestroyEffects, GetActorTransform());
+		}
+		
+		if (DestroySound != nullptr)
+		{
+			UGameplayStatics::SpawnSoundAtLocation(World, DestroySound, GetActorLocation());
+		}
+		
+		Destroy();
+	}
 }
 

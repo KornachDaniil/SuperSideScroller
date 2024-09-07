@@ -9,6 +9,7 @@ void AEnemyBase::DestroyEnemy()
 {
 
 	UWorld* World = GetWorld();
+	
 	if (World)
 	{
 		if (DeathEffect)
@@ -20,7 +21,8 @@ void AEnemyBase::DestroyEnemy()
 		{
 			UGameplayStatics::SpawnSoundAtLocation(World, DeathSound, GetActorLocation());	
 		}
+		
+		Destroy();
 	}
 	
-	Destroy();
 }

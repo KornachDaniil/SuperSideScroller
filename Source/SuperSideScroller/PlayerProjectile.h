@@ -41,5 +41,11 @@ private:
 
 	UPROPERTY(VisibleDefaultsOnly, Category=Projectile)
 	UParticleSystemComponent* ProjectileEffects;
+
+	UPROPERTY(EditAnywhere, Category=Sound)
+	USoundBase* DestroySound;
+
+	UPROPERTY(EditAnywhere, Category=Projectile)
+	UParticleSystem* DestroyEffects;
 	
 };
