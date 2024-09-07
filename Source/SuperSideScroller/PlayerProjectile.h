@@ -35,4 +35,11 @@ private:
 
 	UPROPERTY(EditAnywhere, Category=Projectile)
 	UStaticMeshComponent* MeshComp;
+
+	UPROPERTY(VisibleDefaultsOnly, Category=Sound)
+	UAudioComponent* ProjectileMovementSound;
+
+	UPROPERTY(VisibleDefaultsOnly, Category=Projectile)
+	UParticleSystemComponent* ProjectileEffects;
+	
 };

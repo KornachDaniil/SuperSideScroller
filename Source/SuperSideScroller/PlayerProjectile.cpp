@@ -4,6 +4,8 @@
 #include "PlayerProjectile.h"
 
 #include "EnemyBase.h"
+#include "Components/AudioComponent.h"
+#include "Particles/ParticleSystemComponent.h"
 
 // Sets default values
 APlayerProjectile::APlayerProjectile()
@@ -24,7 +26,12 @@ APlayerProjectile::APlayerProjectile()
 	MeshComp->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepWorldTransform);
 
 	InitialLifeSpan = 3.0f;
-	
+
+	ProjectileMovementSound = CreateDefaultSubobject<UAudioComponent>(TEXT("ProjectileMovementSound"));
+	ProjectileMovementSound->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepWorldTransform);
+
+	ProjectileEffects = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("ProjectileEffects"));
+	ProjectileEffects->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepWorldTransform);
 
 }
 
