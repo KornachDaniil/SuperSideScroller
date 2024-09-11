@@ -101,7 +101,6 @@ void ASuperSidescroller_Player::SpawnProjectile()
 			const FVector SpawnLocation = this->GetMesh()->GetSocketLocation(FName("ProjectileSocket"));
 			const FRotator Rotation = GetActorForwardVector().Rotation();
 			APlayerProjectile* Projectile = World->SpawnActor<APlayerProjectile>(PlayerProjectile, SpawnLocation, Rotation, SpawnParams);
-			UE_LOG(LogTemp, Warning, TEXT("Spawn"));
 		}
 	}	
 }
