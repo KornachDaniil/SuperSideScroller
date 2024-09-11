@@ -18,6 +18,11 @@ class SUPERSIDESCROLLER_API ASuperSidescroller_Player : public ASuperSideScrolle
 public:
 	ASuperSidescroller_Player();
 
+	UFUNCTION(BlueprintPure)
+	FORCEINLINE int32 GetCurrentNumberofCollectables() const { return NumberofCollectables; }
+
+	void IncrementNumberofCollectables(int32 Value);
+
 	void SpawnProjectile();
 
 protected:
@@ -41,6 +46,8 @@ protected:
 	
 private:
 	bool bIsSprinting;
+
+	int32 NumberofCollectables;
 
 	UPROPERTY(EditAnywhere)
 	UAnimMontage* ThrowMontage;

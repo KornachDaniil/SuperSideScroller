@@ -76,6 +76,19 @@ void ASuperSidescroller_Player::ThrowProjectile()
 }
 
 
+void ASuperSidescroller_Player::IncrementNumberofCollectables(int32 Value)
+{
+	if (Value <= 0)
+	{
+		return;
+	}
+	else
+	{
+		NumberofCollectables += Value;
+	}
+	UE_LOG(LogTemp, Warning, TEXT("Number of Coins: %d"), NumberofCollectables);
+}
+
 void ASuperSidescroller_Player::SpawnProjectile()
 {
 	if (PlayerProjectile != nullptr)

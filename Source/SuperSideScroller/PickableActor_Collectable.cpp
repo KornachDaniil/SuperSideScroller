@@ -13,5 +13,6 @@ void APickableActor_Collectable::PlayerPickedUp(ASuperSidescroller_Player* Playe
 {
 	Super::PlayerPickedUp(Player);
 	
+	Player->IncrementNumberofCollectables(CollectableValue);
 }
 
