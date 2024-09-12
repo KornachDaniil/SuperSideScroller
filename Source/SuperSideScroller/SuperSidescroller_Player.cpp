@@ -50,7 +50,14 @@ void ASuperSidescroller_Player::Sprint()
 	if (bIsSprinting != true)
 	{
 		bIsSprinting = true;
-		GetCharacterMovement()->MaxWalkSpeed = 500.0f;
+		if (bHasPowerupActive == true)
+		{
+			GetCharacterMovement()->MaxWalkSpeed = 900.0f;
+		}
+		else
+		{
+			GetCharacterMovement()->MaxWalkSpeed = 500.0f;
+		}
 	}
 }
 
@@ -59,7 +66,14 @@ void ASuperSidescroller_Player::StopSprinting()
 	if (bIsSprinting != false)
 	{
 		bIsSprinting = false;
-		GetCharacterMovement()->MaxWalkSpeed = 300.0f;
+		if (bHasPowerupActive == true)
+		{
+			GetCharacterMovement()->MaxWalkSpeed = 500.0f;
+		}
+		else
+		{
+			GetCharacterMovement()->MaxWalkSpeed = 300.0f;
+		}
 	}
 }
 
@@ -103,5 +117,33 @@ void ASuperSidescroller_Player::SpawnProjectile()
 			APlayerProjectile* Projectile = World->SpawnActor<APlayerProjectile>(PlayerProjectile, SpawnLocation, Rotation, SpawnParams);
 		}
 	}	
+}
+
+void ASuperSidescroller_Player::IncreaseMovementPowerup()
+{
+	bHasPowerupActive = true;
+	GetCharacterMovement()->MaxWalkSpeed = 500.0f;
+	GetCharacterMovement()->JumpZVelocity = 1500.0f;
+
+	UWorld* World = GetWorld();
+
+	if (World != nullptr)
+	{
+		World->GetTimerManager().SetTimer(PowerupHandle, this, &ASuperSidescroller_Player::EndPowerup, 8.0f, false);
+	}
+}
+
+void ASuperSidescroller_Player::EndPowerup()
+{
+	bHasPowerupActive = false;
+	GetCharacterMovement()->MaxWalkSpeed = 300.0f;
+	GetCharacterMovement()->JumpZVelocity = 1000.0f;
+
+	UWorld* World = GetWorld();
+
+	if (World != nullptr)
+	{
+		World->GetTimerManager().ClearTimer(PowerupHandle);
+	}
 }
 

@@ -25,6 +25,10 @@ public:
 
 	void SpawnProjectile();
 
+	void IncreaseMovementPowerup();
+
+	void EndPowerup();
+
 protected:
 
 	// Существует в базовом классе 
@@ -45,14 +49,20 @@ protected:
 	void ThrowProjectile();
 	
 private:
-	bool bIsSprinting;
-
-	int32 NumberofCollectables;
-
 	UPROPERTY(EditAnywhere)
 	UAnimMontage* ThrowMontage;
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<APlayerProjectile> PlayerProjectile;
 	
+	bool bIsSprinting;
+
+	int32 NumberofCollectables;
+
+	FTimerHandle PowerupHandle;
+
+	bool bHasPowerupActive;
+
+	
+
 };
