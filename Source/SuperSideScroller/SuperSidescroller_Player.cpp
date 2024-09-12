@@ -122,7 +122,16 @@ void ASuperSidescroller_Player::SpawnProjectile()
 void ASuperSidescroller_Player::IncreaseMovementPowerup()
 {
 	bHasPowerupActive = true;
-	GetCharacterMovement()->MaxWalkSpeed = 500.0f;
+	
+	if (bIsSprinting == true)
+	{
+		GetCharacterMovement()->MaxWalkSpeed = 900.0f;
+	}
+	else
+	{
+		GetCharacterMovement()->MaxWalkSpeed = 500.0f;
+	}
+	
 	GetCharacterMovement()->JumpZVelocity = 1500.0f;
 
 	UWorld* World = GetWorld();
@@ -136,7 +145,15 @@ void ASuperSidescroller_Player::IncreaseMovementPowerup()
 void ASuperSidescroller_Player::EndPowerup()
 {
 	bHasPowerupActive = false;
-	GetCharacterMovement()->MaxWalkSpeed = 300.0f;
+	if (bIsSprinting == false)
+	{
+		GetCharacterMovement()->MaxWalkSpeed = 300.0f;
+	}
+	else
+	{
+		GetCharacterMovement()->MaxWalkSpeed = 500.0f;
+	}
+	
 	GetCharacterMovement()->JumpZVelocity = 1000.0f;
 
 	UWorld* World = GetWorld();
