@@ -33,6 +33,12 @@ public:
 
 	void EndGravity();
 
+	UPROPERTY(EditAnywhere, Category=Setup)
+	float WalkSpeed;
+
+	UPROPERTY(EditAnywhere, Category=Setup)
+	float SprintSpeed;
+
 protected:
 
 	// Существует в базовом классе 
@@ -59,7 +65,7 @@ private:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<APlayerProjectile> PlayerProjectile;
 	
-	int32 NumberofCollectables;
+	int32 NumberofCollectables = 8;
 
 	FTimerHandle PowerupHandle;
 

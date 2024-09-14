@@ -15,7 +15,11 @@ ASuperSidescroller_Player::ASuperSidescroller_Player()
 
 	IA_Sprint = nullptr;
 
-	GetCharacterMovement()->MaxWalkSpeed = 300.0f;
+	WalkSpeed = 300.0f;
+
+	SprintSpeed = 500.0f;
+
+	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
 }
 
 void ASuperSidescroller_Player::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -56,7 +60,7 @@ void ASuperSidescroller_Player::Sprint()
 		}
 		else
 		{
-			GetCharacterMovement()->MaxWalkSpeed = 500.0f;
+			GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
 		}
 	}
 }
@@ -68,11 +72,11 @@ void ASuperSidescroller_Player::StopSprinting()
 		bIsSprinting = false;
 		if (bHasPowerupActive == true)
 		{
-			GetCharacterMovement()->MaxWalkSpeed = 500.0f;
+			GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
 		}
 		else
 		{
-			GetCharacterMovement()->MaxWalkSpeed = 300.0f;
+			GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
 		}
 	}
 }
@@ -99,8 +103,22 @@ void ASuperSidescroller_Player::IncrementNumberofCollectables(int32 Value)
 	else
 	{
 		NumberofCollectables += Value;
+
+		if (NumberofCollectables == 10)
+		{
+			WalkSpeed = 400.0f;
+			SprintSpeed = 600.0f;
+			
+			if (bIsSprinting == true)
+			{
+				GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
+			}
+			else
+			{
+				GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+			}
+		}
 	}
-	UE_LOG(LogTemp, Warning, TEXT("Number of Coins: %d"), NumberofCollectables);
 }
 
 void ASuperSidescroller_Player::SpawnProjectile()
@@ -129,7 +147,7 @@ void ASuperSidescroller_Player::IncreaseMovementPowerup()
 	}
 	else
 	{
-		GetCharacterMovement()->MaxWalkSpeed = 500.0f;
+		GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
 	}
 	
 	GetCharacterMovement()->JumpZVelocity = 1500.0f;
@@ -147,11 +165,11 @@ void ASuperSidescroller_Player::EndPowerup()
 	bHasPowerupActive = false;
 	if (bIsSprinting == false)
 	{
-		GetCharacterMovement()->MaxWalkSpeed = 300.0f;
+		GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
 	}
 	else
 	{
-		GetCharacterMovement()->MaxWalkSpeed = 500.0f;
+		GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
 	}
 	
 	GetCharacterMovement()->JumpZVelocity = 1000.0f;
