@@ -29,6 +29,10 @@ public:
 
 	void EndPowerup();
 
+	void IncreaseMovementGravity();
+
+	void EndGravity();
+
 protected:
 
 	// Существует в базовом классе 
@@ -55,13 +59,17 @@ private:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<APlayerProjectile> PlayerProjectile;
 	
-	bool bIsSprinting;
-
 	int32 NumberofCollectables;
 
 	FTimerHandle PowerupHandle;
 
+	FTimerHandle GravityHandle;
+	
+	bool bIsSprinting;
+	
 	bool bHasPowerupActive;
+
+	bool bHasGravityActive;
 
 	
 

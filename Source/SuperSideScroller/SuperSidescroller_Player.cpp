@@ -164,3 +164,31 @@ void ASuperSidescroller_Player::EndPowerup()
 	}
 }
 
+void ASuperSidescroller_Player::IncreaseMovementGravity()
+{
+	bHasGravityActive = true;
+
+	GetCharacterMovement()->GravityScale = 1.0f;
+
+	UWorld* World = GetWorld();
+
+	if (World != nullptr)
+	{
+		World->GetTimerManager().SetTimer(GravityHandle, this, &ASuperSidescroller_Player::EndGravity, 8.0f, false);
+	}
+}
+
+void ASuperSidescroller_Player::EndGravity()
+{
+	bHasGravityActive = false;
+
+	GetCharacterMovement()->GravityScale = 2.0f;
+
+	UWorld* World = GetWorld();
+
+	if (World != nullptr)
+	{
+		World->GetTimerManager().ClearTimer(GravityHandle);
+	}
+}
+
