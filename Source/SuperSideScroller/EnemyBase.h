@@ -35,6 +35,11 @@ public:
 
 	
 protected:
+	virtual void BeginPlay() override;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float WalkSpeed = 500.0f;
+
 
 private:
 	

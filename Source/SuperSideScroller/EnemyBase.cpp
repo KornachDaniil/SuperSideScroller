@@ -4,7 +4,7 @@
 #include "EnemyBase.h"
 
 #include "SuperSidescroller_Player.h"
-// #include "Components/CapsuleComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 
 
@@ -14,6 +14,15 @@ AEnemyBase::AEnemyBase()
 	CollisionComp->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepWorldTransform);
 
 	CollisionComp->OnComponentBeginOverlap.AddDynamic(this, &AEnemyBase::OnOverlap);
+}
+
+
+void AEnemyBase::BeginPlay()
+{
+	Super::BeginPlay();
+
+	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+	
 }
 
 void AEnemyBase::DestroyEnemy()
@@ -56,3 +65,4 @@ void AEnemyBase::OnOverlap(UPrimitiveComponent* ThisComp, AActor* OtherActor, UP
 		}
 	}
 }
+
