@@ -3,6 +3,7 @@
 
 #include "SuperSidescroller_Player.h"
 
+#include "EnemyBase.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -92,7 +93,6 @@ void ASuperSidescroller_Player::ThrowProjectile()
 		}
 	}
 }
-
 
 void ASuperSidescroller_Player::IncrementNumberofCollectables(int32 Value)
 {
@@ -209,4 +209,3 @@ void ASuperSidescroller_Player::EndGravity()
 		World->GetTimerManager().ClearTimer(GravityHandle);
 	}
 }
-

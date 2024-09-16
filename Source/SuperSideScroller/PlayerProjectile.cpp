@@ -39,7 +39,6 @@ APlayerProjectile::APlayerProjectile()
 void APlayerProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	FVector NormalImpulse, const FHitResult& Hit)
 {
-	UE_LOG(LogTemp, Warning, TEXT("HIT"));
 	AEnemyBase* Enemy = Cast<AEnemyBase>(OtherActor);
 	if (Enemy != nullptr)
 	{

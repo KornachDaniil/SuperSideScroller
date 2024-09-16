@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "SuperSideScrollerCharacter.h"
+#include "Components/SphereComponent.h"
 #include "EnemyBase.generated.h"
 
 /**
@@ -15,6 +16,8 @@ class SUPERSIDESCROLLER_API AEnemyBase : public ASuperSideScrollerCharacter
 	GENERATED_BODY()
 
 public:
+	AEnemyBase();
+	
 	void DestroyEnemy();
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
@@ -22,6 +25,14 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	USoundBase* DeathSound;
+
+	UPROPERTY(VisibleDefaultsOnly)
+	USphereComponent* CollisionComp;
+
+	UFUNCTION()
+	void OnOverlap(class UPrimitiveComponent* ThisComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+		int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
 	
 protected:
 

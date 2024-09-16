@@ -21,6 +21,8 @@ public:
 	UFUNCTION(BlueprintPure)
 	FORCEINLINE int32 GetCurrentNumberofCollectables() const { return NumberofCollectables; }
 
+	FORCEINLINE bool GetbHasPowerupActive() const { return bHasPowerupActive; }
+
 	void IncrementNumberofCollectables(int32 Value);
 
 	void SpawnProjectile();
@@ -40,11 +42,6 @@ public:
 	float SprintSpeed;
 
 protected:
-
-	// Существует в базовом классе 
-	// UPROPERTY(EditAnywhere, Category="Input")
-	// UInputMappingContext* IC_Character;
-
 	UPROPERTY(EditAnywhere, Category="Input")
 	UInputAction* IA_Sprint;
 	
@@ -65,7 +62,7 @@ private:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<APlayerProjectile> PlayerProjectile;
 	
-	int32 NumberofCollectables = 8;
+	int32 NumberofCollectables;
 
 	FTimerHandle PowerupHandle;
 
@@ -76,7 +73,4 @@ private:
 	bool bHasPowerupActive;
 
 	bool bHasGravityActive;
-
-	
-
 };
