@@ -40,7 +40,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float WalkSpeed = 500.0f;
 
+	void RespawnPlayer() const;
+	
+	FTimerHandle PlayerRespawnHandle;
 
 private:
-	
 };

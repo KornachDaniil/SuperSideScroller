@@ -61,8 +61,23 @@ void AEnemyBase::OnOverlap(UPrimitiveComponent* ThisComp, AActor* OtherActor, UP
 		else
 		{
 			Player->Destroy();
-			UKismetSystemLibrary::QuitGame(GetWorld(), 0, EQuitPreference::Quit, false);
+
+			UWorld* World = GetWorld();
+
+			if (World != nullptr)
+			{
+				World->GetTimerManager().SetTimer(PlayerRespawnHandle, this, &AEnemyBase::RespawnPlayer, 3.0f, false);
+			}
 		}
 	}
 }
 
+void AEnemyBase::RespawnPlayer() const
+{
+	UWorld* World = GetWorld();
+
+	if (World != nullptr)
+	{
+		UGameplayStatics::OpenLevel(World, "SuperSideScroller");
+	}
+}

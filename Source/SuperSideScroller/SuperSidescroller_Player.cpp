@@ -7,6 +7,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 ASuperSidescroller_Player::ASuperSidescroller_Player()
 {
@@ -46,6 +47,7 @@ void ASuperSidescroller_Player::SetupPlayerInputComponent(UInputComponent* Playe
 			EnhancedInputComponent->BindAction(IA_Sprint, ETriggerEvent::Triggered, this, &ASuperSidescroller_Player::Sprint);
 			EnhancedInputComponent->BindAction(IA_Sprint, ETriggerEvent::Completed, this, &ASuperSidescroller_Player::StopSprinting);
 			EnhancedInputComponent->BindAction(IA_Throw, ETriggerEvent::Started, this, &ASuperSidescroller_Player::ThrowProjectile);
+			EnhancedInputComponent->BindAction(IA_Quit, ETriggerEvent::Started, this, &ASuperSidescroller_Player::QuitGame);
 		}
 	}
 }
@@ -132,7 +134,7 @@ void ASuperSidescroller_Player::SpawnProjectile()
 			SpawnParams.Owner = this;
 			const FVector SpawnLocation = this->GetMesh()->GetSocketLocation(FName("ProjectileSocket"));
 			const FRotator Rotation = GetActorForwardVector().Rotation();
-			APlayerProjectile* Projectile = World->SpawnActor<APlayerProjectile>(PlayerProjectile, SpawnLocation, Rotation, SpawnParams);
+			World->SpawnActor<APlayerProjectile>(PlayerProjectile, SpawnLocation, Rotation, SpawnParams);
 		}
 	}	
 }
@@ -209,3 +211,9 @@ void ASuperSidescroller_Player::EndGravity()
 		World->GetTimerManager().ClearTimer(GravityHandle);
 	}
 }
+
+void ASuperSidescroller_Player::QuitGame()
+{
+	UKismetSystemLibrary::QuitGame(GetWorld(), 0, EQuitPreference::Quit, false);
+}
+

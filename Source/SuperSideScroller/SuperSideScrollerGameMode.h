@@ -13,6 +13,10 @@ class ASuperSideScrollerGameMode : public AGameModeBase
 
 public:
 	ASuperSideScrollerGameMode();
+
+protected:
+
+private:
 };
 
 

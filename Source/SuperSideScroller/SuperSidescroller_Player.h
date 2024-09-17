@@ -47,6 +47,9 @@ protected:
 	
 	UPROPERTY(EditAnywhere, Category="Input")
 	UInputAction* IA_Throw;
+
+	UPROPERTY(EditAnywhere, Category="Input")
+	UInputAction* IA_Quit;
 	
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
@@ -54,6 +57,8 @@ protected:
 	void StopSprinting();
 
 	void ThrowProjectile();
+
+	void QuitGame();
 	
 private:
 	UPROPERTY(EditAnywhere)
