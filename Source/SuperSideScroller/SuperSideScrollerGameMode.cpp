@@ -1,7 +1,6 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "SuperSideScrollerGameMode.h"
-#include "SuperSideScrollerCharacter.h"
 #include "UObject/ConstructorHelpers.h"
 
 ASuperSideScrollerGameMode::ASuperSideScrollerGameMode()

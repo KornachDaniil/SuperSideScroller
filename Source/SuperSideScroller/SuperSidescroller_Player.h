@@ -23,7 +23,7 @@ public:
 
 	FORCEINLINE bool GetbHasPowerupActive() const { return bHasPowerupActive; }
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void DeathPlayer();
 
 	void IncrementNumberofCollectables(int32 Value);
@@ -56,9 +56,6 @@ protected:
 	
 	UPROPERTY(EditAnywhere, Category="Input")
 	UInputAction* IA_Throw;
-
-	UPROPERTY(EditAnywhere, Category="Input")
-	UInputAction* IA_Quit;
 	
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
@@ -66,8 +63,6 @@ protected:
 	void StopSprinting();
 
 	void ThrowProjectile();
-
-	void QuitGame();
 	
 private:
 	UPROPERTY(EditAnywhere)
