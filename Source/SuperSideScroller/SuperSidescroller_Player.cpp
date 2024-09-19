@@ -7,6 +7,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 ASuperSidescroller_Player::ASuperSidescroller_Player()
@@ -36,14 +37,6 @@ void ASuperSidescroller_Player::SetupPlayerInputComponent(UInputComponent* Playe
 
 		if (PlayerController != nullptr)
 		{
-			// Сделано в базовом классе
-			// UEnhancedInputLocalPlayerSubsystem* EnhancedSubsystem
-			// 	= ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer());
-			//
-			// if (EnhancedSubsystem != nullptr)
-			// {
-			// 	EnhancedSubsystem->AddMappingContext(IC_Character, 1);
-			// }
 			EnhancedInputComponent->BindAction(IA_Sprint, ETriggerEvent::Triggered, this, &ASuperSidescroller_Player::Sprint);
 			EnhancedInputComponent->BindAction(IA_Sprint, ETriggerEvent::Completed, this, &ASuperSidescroller_Player::StopSprinting);
 			EnhancedInputComponent->BindAction(IA_Throw, ETriggerEvent::Started, this, &ASuperSidescroller_Player::ThrowProjectile);
@@ -217,3 +210,20 @@ void ASuperSidescroller_Player::QuitGame()
 	UKismetSystemLibrary::QuitGame(GetWorld(), 0, EQuitPreference::Quit, false);
 }
 
+void ASuperSidescroller_Player::DeathPlayer()
+{
+	UWorld* World = GetWorld();
+
+	if (World != nullptr)
+	{
+		if (DeathSound != nullptr)
+		{
+			UGameplayStatics::SpawnSoundAtLocation(World, DeathSound, GetActorLocation());
+		}
+		if (DeathEffect != nullptr)
+		{
+			UGameplayStatics::SpawnEmitterAtLocation(World, DeathEffect, GetActorTransform());
+		}
+		Destroy();
+	}
+}

@@ -60,7 +60,7 @@ void AEnemyBase::OnOverlap(UPrimitiveComponent* ThisComp, AActor* OtherActor, UP
 		}
 		else
 		{
-			Player->Destroy();
+			Player->DeathPlayer();
 
 			UWorld* World = GetWorld();
 

@@ -23,6 +23,9 @@ public:
 
 	FORCEINLINE bool GetbHasPowerupActive() const { return bHasPowerupActive; }
 
+	UFUNCTION()
+	void DeathPlayer();
+
 	void IncrementNumberofCollectables(int32 Value);
 
 	void SpawnProjectile();
@@ -40,6 +43,12 @@ public:
 
 	UPROPERTY(EditAnywhere, Category=Setup)
 	float SprintSpeed;
+
+	UPROPERTY(EditAnywhere, Category=Death)
+	USoundBase* DeathSound;
+
+	UPROPERTY(EditAnywhere, Category=Death)
+	UParticleSystem* DeathEffect;
 
 protected:
 	UPROPERTY(EditAnywhere, Category="Input")
