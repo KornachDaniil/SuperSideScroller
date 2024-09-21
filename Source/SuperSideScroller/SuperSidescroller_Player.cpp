@@ -111,6 +111,10 @@ void ASuperSidescroller_Player::IncrementNumberofCollectables(int32 Value)
 				GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
 			}
 		}
+		if (NumberofCollectables == 21)
+		{
+			UKismetSystemLibrary::QuitGame(GetWorld(), 0, EQuitPreference::Quit, false);
+		}
 	}
 }
 
