@@ -82,4 +82,6 @@ private:
 	bool bHasPowerupActive;
 
 	bool bHasGravityActive;
+
+	bool bCanFire;
 };

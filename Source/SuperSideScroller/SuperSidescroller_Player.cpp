@@ -13,7 +13,7 @@ ASuperSidescroller_Player::ASuperSidescroller_Player()
 {
 	bIsSprinting = false;
 
-	// IC_Character = nullptr;
+	bCanFire = false;
 
 	IA_Sprint = nullptr;
 
@@ -77,8 +77,10 @@ void ASuperSidescroller_Player::StopSprinting()
 
 void ASuperSidescroller_Player::ThrowProjectile()
 {
-	if (ThrowMontage != nullptr)
+	
+	if (ThrowMontage != nullptr && GetActorForwardVector().X < 0.1f)
 	{
+		bCanFire = true;
 		const bool bIsMontagePlaying = GetMesh()->GetAnimInstance()->Montage_IsPlaying(ThrowMontage);
 		if(bIsMontagePlaying != true)
 		{
@@ -120,7 +122,7 @@ void ASuperSidescroller_Player::IncrementNumberofCollectables(int32 Value)
 
 void ASuperSidescroller_Player::SpawnProjectile()
 {
-	if (PlayerProjectile != nullptr)
+	if (PlayerProjectile != nullptr && bCanFire == true)
 	{
 		UWorld* World = GetWorld();
 		if (World != nullptr)
@@ -131,7 +133,8 @@ void ASuperSidescroller_Player::SpawnProjectile()
 			const FRotator Rotation = GetActorForwardVector().Rotation();
 			World->SpawnActor<APlayerProjectile>(PlayerProjectile, SpawnLocation, Rotation, SpawnParams);
 		}
-	}	
+		bCanFire = false;
+	}
 }
 
 void ASuperSidescroller_Player::IncreaseMovementPowerup()
